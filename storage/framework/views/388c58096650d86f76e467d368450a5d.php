@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>SISPEKA</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fb;
+        }
+        .sidebar {
+            width: 250px;
+            min-height: 100vh;
+            background: #ffffff;
+            border-right: 1px solid #e5e6eb;
+        }
+        .sidebar-title {
+            color: #116ccd;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .sidebar .nav-link {
+            color: #0c0c86;
+            font-size: 15px;
+        }
+        .sidebar .nav-link.active,
+        .sidebar .nav-link:hover {
+            background-color: rgba(15, 7, 128, 0.15);
+            color: #0c4786;
+        }
+        .content-area {
+            padding: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark bg-primary px-3">
+    <span class="navbar-brand fw-bold">SISPEKA</span>
+
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(auth()->guard()->check()): ?>
+    <form method="POST" action="<?php echo e(route('logout')); ?>">
+        <?php echo csrf_field(); ?>
+        <button class="btn btn-light btn-sm">Logout</button>
+    </form>
+    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+</nav>
+
+<div class="d-flex">
+<!-- SIDEBAR -->
+<aside class="sidebar p-3">
+
+    <h6 class="sidebar-title text-uppercase mb-3">Menu</h6>
+
+    
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(auth()->user()->role === 'admin'): ?>
+
+        <ul class="nav nav-pills flex-column mb-3">
+            <li class="nav-item mb-2">
+                <a href="<?php echo e(route('admin.dashboard')); ?>"
+                   class="nav-link <?php echo e(request()->routeIs('admin.dashboard') ? 'active' : ''); ?>">
+                    <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                </a>
+            </li>
+        </ul>
+
+        <h6 class="sidebar-title text-uppercase mb-2">Master Data</h6>
+        <ul class="nav nav-pills flex-column mb-3">
+            <li class="nav-item mb-2">
+                <a href="<?php echo e(route('admin.guru.index')); ?>"
+                   class="nav-link <?php echo e(request()->routeIs('admin.guru.*') ? 'active' : ''); ?>">
+                    <i class="bi bi-person-workspace me-2"></i> Guru
+                </a>
+            </li>
+
+            <li class="nav-item mb-2">
+                <a href="<?php echo e(route('admin.siswa.index')); ?>"
+                   class="nav-link <?php echo e(request()->routeIs('admin.siswa.*') ? 'active' : ''); ?>">
+                    <i class="bi bi-people-fill me-2"></i> Siswa
+                </a>
+            </li>
+
+            <li class="nav-item mb-2">
+                <a href="<?php echo e(route('admin.kelas.index')); ?>"
+                   class="nav-link <?php echo e(request()->routeIs('admin.kelas.*') ? 'active' : ''); ?>">
+                    <i class="bi bi-door-open me-2"></i> Kelas
+                </a>
+            </li>
+
+            <li class="nav-item mb-2">
+                <a href="<?php echo e(route('admin.subject.index')); ?>"
+                   class="nav-link <?php echo e(request()->routeIs('admin.subject.*') ? 'active' : ''); ?>">
+                    <i class="bi bi-book-fill me-2"></i> Mata Pelajaran
+                </a>
+            </li>
+
+            <li class="nav-item mb-2">
+                <a href="<?php echo e(route('admin.teaching.index')); ?>"
+                   class="nav-link <?php echo e(request()->routeIs('admin.teaching.*') ? 'active' : ''); ?>">
+                    <i class="bi bi-journal-check me-2"></i> Penugasan Mengajar
+                </a>
+            </li>
+        </ul>
+
+    
+    <?php elseif(auth()->user()->role === 'guru'): ?>
+
+        <ul class="nav nav-pills flex-column mb-3">
+            <li class="nav-item mb-2">
+                <a href="<?php echo e(route('guru.dashboard')); ?>"
+                   class="nav-link <?php echo e(request()->routeIs('guru.dashboard') ? 'active' : ''); ?>">
+                    <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                </a>
+            </li>
+        </ul>
+
+        <h6 class="sidebar-title text-uppercase mb-2">Akademik</h6>
+        <ul class="nav nav-pills flex-column mb-3">
+            <li class="nav-item mb-2">
+                <a href="<?php echo e(route('guru.attendance.index')); ?>"
+                   class="nav-link <?php echo e(request()->routeIs('attendance.*') ? 'active' : ''); ?>">
+                    <i class="bi bi-calendar-check me-2"></i> Kehadiran
+                </a>
+            </li>
+
+            <li class="nav-item mb-2">
+                <a href="<?php echo e(route('guru.grade.index')); ?>"
+                   class="nav-link <?php echo e(request()->routeIs('grade.*') ? 'active' : ''); ?>">
+                    <i class="bi bi-bar-chart-fill me-2"></i> Nilai
+                </a>
+            </li>
+
+            <li class="nav-item mb-2">
+                <a href="<?php echo e(route('guru.laporan.index')); ?>"
+                   class="nav-link <?php echo e(request()->routeIs('laporan.*') ? 'active' : ''); ?>">
+                    <i class="bi bi-journal-text me-2"></i> Catatan Perilaku
+                </a>
+            </li>
+        </ul>
+
+    
+    <?php elseif(auth()->user()->role === 'wali'): ?>
+
+        <ul class="nav nav-pills flex-column mb-3">
+            <li class="nav-item mb-2">
+                <a href="<?php echo e(route('wali.dashboard')); ?>"
+                   class="nav-link <?php echo e(request()->routeIs('wali.dashboard') ? 'active' : ''); ?>">
+                    <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                </a>
+            </li>
+        </ul>
+
+        <h6 class="sidebar-title text-uppercase mb-2">Informasi Siswa</h6>
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item mb-2">
+                <a href="<?php echo e(route('wali.attendance')); ?>"
+                   class="nav-link <?php echo e(request()->routeIs('wali.attendance') ? 'active' : ''); ?>">
+                    <i class="bi bi-calendar-check me-2"></i> Kehadiran
+                </a>
+            </li>
+
+            <li class="nav-item mb-2">
+                <a href="<?php echo e(route('wali.grade')); ?>"
+                   class="nav-link <?php echo e(request()->routeIs('wali.grade') ? 'active' : ''); ?>">
+                    <i class="bi bi-bar-chart-fill me-2"></i> Nilai
+                </a>
+            </li>
+
+            <li class="nav-item mb-2">
+                <a href="<?php echo e(route('wali.laporan')); ?>"
+                   class="nav-link <?php echo e(request()->routeIs('wali.laporan') ? 'active' : ''); ?>">
+                    <i class="bi bi-journal-text me-2"></i> Laporan Siswa
+                </a>
+            </li>
+        </ul>
+
+    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+
+</aside>
+
+    <!-- CONTENT -->
+    <main class="flex-fill content-area">
+        <?php echo $__env->yieldContent('content'); ?>
+    </main>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+<?php /**PATH C:\laragon\www\sispeka\resources\views/layouts/app.blade.php ENDPATH**/ ?>
