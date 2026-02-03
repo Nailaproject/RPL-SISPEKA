@@ -1,66 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SISPEKA (Sistem Informasi Pengawasan & Evaluasi Karakter dan Akademik Siswa SMA) Disusun Oleh: Muhamad Naila Sapitri (23010220017)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+SISPEKA merupakan sistem informasi berbasis web yang dirancang untuk meningkatkan transparansi dan kolaborasi antara guru, wali murid, serta pihak sekolah dalam pemantauan akademik dan perilaku siswa. Sistem ini berfungsi sebagai media pencatatan absensi, nilai, dan catatan karakter siswa yang dapat diakses secara real-time oleh wali murid. Melalui pendekatan Object-Oriented Design (OOD), sistem ini dibangun dengan struktur modular yang mendukung maintainability, scalability, dan reusability. Dengan implementasi pola desain seperti Factory Method, Builder, dan Singleton, sistem ini dapat dikembangkan lebih lanjut untuk mendukung analisis perilaku siswa dan sistem rekomendasi pembinaan.
+--
+##  Peran Pengguna
 
-## About Laravel
+SISPEKA memiliki beberapa jenis pengguna dengan hak akses berbeda:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+| Role |                Akses Utama |
+|------|                -------------|
+| **Admin**             | Mengelola data master (guru, siswa, kelas, mata pelajaran, akun) |
+| **Guru**              | Input absensi, nilai, dan catatan perilaku siswa |
+| **Wali Murid**        | Melihat absensi, nilai, laporan perilaku, dan notifikasi |
+| **BK/Kepala Sekolah** | Memproses insiden dan melihat laporan rekap |
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+--
+##  Fitur Utama
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Manajemen Akademik
+- Input absensi per kelas
+- Input nilai siswa (tugas, ulangan, ujian)
+- Rekap nilai otomatis
 
-## Learning Laravel
+### Manajemen Perilaku
+- Pencatatan perilaku siswa
+- Tindak lanjut insiden
+- Riwayat pembinaan
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Monitoring Wali Murid
+- Melihat kehadiran siswa
+- Melihat nilai akademik
+- Menerima notifikasi dari guru
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Sistem Notifikasi
+- Notifikasi laporan perilaku
+- Notifikasi ketidakhadiran siswa
+- Informasi perkembangan siswa secara real-time
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Manajemen Data Master (Admin)
+- Kelola guru
+- Kelola siswa
+- Kelola kelas & mata pelajaran
+- Kelola akun pengguna
 
-## Laravel Sponsors
+---
+## Arsitektur Sistem
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+SISPEKA dikembangkan menggunakan pola **MVC (Model-View-Controller)** dengan framework Laravel.
 
-### Premium Partners
+**Teknologi yang digunakan:**
+- Laravel (Backend)
+- MySQL (Database)
+- Bootstrap (Frontend)
+- Laragon + HeidiSQL (Development Environment)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Struktur Database Utama
 
-## Contributing
+| Tabel |              Fungsi |
+|------|               --------|
+| `users`                | Data akun pengguna berdasarkan role |
+| `guru`                 | Data guru |
+| `siswa`                | Data siswa |
+| `kelas`                | Data kelas |
+| `subjects`             | Data mata pelajaran |
+| `teaching_assignments` | Relasi guru, kelas, dan mapel |
+| `attendance`           | Data absensi siswa |
+| `grades`               | Data nilai siswa |
+| `LaporanSiswa`         | Catatan perilaku siswa |
+| `notifications`        | Notifikasi untuk pengguna |
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
+##  Sistem Login
 
-## Code of Conduct
+Metode login dibedakan berdasarkan role:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+| Role |     Login Menggunakan |
+|------      |------------------|
+| Admin      | Email |
+| Guru       | NIP |
+| Wali Murid | NIS Siswa |
 
-## Security Vulnerabilities
+Tersedia juga fitur **Registrasi Akun** untuk wali murid yang belum memiliki akun.
+--
+## Diagram Sistem
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Dokumentasi sistem dilengkapi dengan:
+- Use Case Diagram
+- Class Diagram
+- Sequence Diagram
+- Activity Diagram
+- ER Diagram
 
-## License
+Diagram-diagram ini menjelaskan alur kerja sistem, relasi antar entitas, serta interaksi pengguna dengan sistem.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
