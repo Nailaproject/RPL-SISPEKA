@@ -1,4 +1,4 @@
-# SISPEKA (Sistem Informasi Pengawasan & Evaluasi Karakter dan Akademik Siswa SMA) Disusun Oleh: Muhamad Naila Sapitri (23010220017)
+# SISPEKA (Sistem Informasi Pengawasan & Evaluasi Karakter dan Akademik Siswa SMA) Disusun Oleh: Naila Sapitri (23010220017)
 
 SISPEKA merupakan sistem informasi berbasis web yang dirancang untuk meningkatkan transparansi dan kolaborasi antara guru, wali murid, serta pihak sekolah dalam pemantauan akademik dan perilaku siswa. Sistem ini berfungsi sebagai media pencatatan absensi, nilai, dan catatan karakter siswa yang dapat diakses secara real-time oleh wali murid. Melalui pendekatan Object-Oriented Design (OOD), sistem ini dibangun dengan struktur modular yang mendukung maintainability, scalability, dan reusability. Dengan implementasi pola desain seperti Factory Method, Builder, dan Singleton, sistem ini dapat dikembangkan lebih lanjut untuk mendukung analisis perilaku siswa dan sistem rekomendasi pembinaan.
 
